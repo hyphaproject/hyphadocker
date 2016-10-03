@@ -15,21 +15,22 @@ RUN mkdir -p /hypha && cd /hypha && git clone https://github.com/hyphaproject/hy
 RUN cd /hypha/hypha && mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Release .. && make && make install
 
 RUN cd /hypha && git clone https://github.com/hyphaproject/hyphahandlers.git
-RUN cd /hypha/hyphahandlers && mkdir build && cd build && cmake .. && make && make install
+RUN cd /hypha/hyphahandlers && mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Release .. && make && make install
 
 RUN apt-get install -y qt5-default libqt5serialport5-dev
 RUN apt-get install -y libboost-python-dev libopencv-dev
 RUN cd /hypha && git clone https://github.com/hyphaproject/hyphaplugins.git
-RUN cd /hypha/hyphaplugins && git submodule update --init --recursive && mkdir build && cd build && cmake .. && make && make install
+RUN cd /hypha/hyphaplugins && git submodule update --init --recursive && mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Release .. && make && make install
 
 RUN cd /tmp && git clone https://github.com/falsecam/confdesc.git
-RUN cd /tmp/confdesc && git submodule update --init --recursive && mkdir build && cd build && cmake .. && make && make install
+RUN cd /tmp/confdesc && git submodule update --init --recursive && mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Release .. && make && make install
 
 RUN cd /hypha && git clone https://github.com/hyphaproject/hyphawebmanager.git
 RUN cd /hypha/hyphawebmanager && git pull && mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Release .. && make && make install
-
+RUN ldconfig
 RUN mkdir -p /etc/hypha/
-COPY hypha.conf /etc/hypha/hypha.conf
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-EXPOSE 3306 80
-CMD ["supervisord"]
+ADD hypha.conf /etc/hypha/hypha.conf
+ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+ADD runhypha.sh /bin/runhypha.sh
+EXPOSE 80
+CMD sh /bin/runhypha.sh

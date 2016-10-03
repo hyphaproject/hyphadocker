@@ -1,14 +1,20 @@
 version: '2'
 services:
- hypha:
-  build: .
-  hostname: hypha
+ mysql:
+  image: mysql
   restart: always
   ports:
-   - "8080:80"
    - "13306:3306"
   environment:
    - MYSQL_ROOT_PASSWORD="hypha"
    - MYSQL_USER="hypha"
    - MYSQL_PASSWORD="hypha"
    - MYSQL_DATABASE="hypha"
+
+
+ hypha:
+  build: .
+  hostname: hypha
+  restart: always
+  ports:
+   - "8080:80"
