@@ -30,7 +30,6 @@ RUN cd /hypha/hyphawebmanager && git pull && mkdir build && cd build && cmake -D
 RUN ldconfig
 RUN mkdir -p /etc/hypha/
 ADD hypha.conf /etc/hypha/hypha.conf
-ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ADD runhypha.sh /bin/runhypha.sh
 EXPOSE 80
 CMD sh /bin/runhypha.sh
