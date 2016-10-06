@@ -26,7 +26,7 @@ RUN cd /tmp && git clone https://github.com/falsecam/confdesc.git
 RUN cd /tmp/confdesc && git submodule update --init --recursive && mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Release .. && make && make install
 
 RUN cd /hypha && git clone https://github.com/hyphaproject/hyphawebmanager.git
-RUN cd /hypha/hyphawebmanager && git pull && mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Release .. && make && make install
+RUN cd /hypha/hyphawebmanager && mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Release .. && make && make install
 RUN ldconfig
 RUN mkdir -p /etc/hypha/
 ADD hypha.conf /etc/hypha/hypha.conf
