@@ -6,10 +6,10 @@ services:
   ports:
    - "13306:3306"
   environment:
-   - MYSQL_ROOT_PASSWORD="hypha"
-   - MYSQL_USER="hypha"
-   - MYSQL_PASSWORD="hypha"
-   - MYSQL_DATABASE="hypha"
+   - MYSQL_ROOT_PASSWORD=hypha
+   - MYSQL_USER=hypha
+   - MYSQL_PASSWORD=hypha
+   - MYSQL_DATABASE=hypha
 
 
  hypha:
