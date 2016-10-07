@@ -13,6 +13,7 @@ services:
 
 
  hypha:
+  # image:chriamue/hyphadocker
   build: .
   hostname: hypha
   restart: always
