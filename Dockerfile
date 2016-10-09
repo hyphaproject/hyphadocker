@@ -25,9 +25,16 @@ RUN cd /tmp/confdesc && git submodule update --init --recursive && mkdir build &
 
 RUN cd /hypha && git clone https://github.com/hyphaproject/hyphawebmanager.git
 RUN cd /hypha/hyphawebmanager && mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Release .. && make && make install && rm -rf /hypha/hyphawebmanager
+
+RUN mkdir -p /etc/kadnode
+RUN apt-get install -y libsodium-dev
+RUN cd /tmp && git clone https://github.com/mwarning/KadNode && cd KadNode && make && make install
+RUN cp /tmp/KadNode/misc/peers.txt /etc/kadnode
+RUN cp /tmp/KadNode/misc/kadnode.conf /etc/kadnode
+
 RUN ldconfig
 RUN mkdir -p /etc/hypha/
 ADD hypha.conf /etc/hypha/hypha.conf
-ADD runhypha.sh /bin/runhypha.sh
-EXPOSE 80
-CMD sh /bin/runhypha.sh
+ADD entrypoint.sh /entrypoint.sh
+EXPOSE 80 6881
+CMD sh /entrypoint.sh
