@@ -16,4 +16,6 @@ else
   . "/etc/kadnode/keys.txt"
 fi
 
-echo "public key: $publickey \n" && kadnode --config /etc/kadnode/kadnode.conf & hyphawebmanager -p80 -f/etc/hypha/hypha.conf -r/usr/local/share/hyphawebmanager/resources --handlersdir=/usr/local/lib/hyphahandlers/ --pluginsdir=/usr/local/lib/hyphaplugins/ 
+echo "public key: $publickey \n" && kadnode --config /etc/kadnode/kadnode.conf &
+hyphawebmanager -p80 -f/etc/hypha/hypha.conf -r/usr/local/share/hyphawebmanager/resources --handlersdir=/usr/local/lib/hyphahandlers/ --pluginsdir=/usr/local/lib/hyphaplugins/ &
+hypharunner -f/etc/hypha/hypha.conf --handlersdir=/usr/local/lib/hyphahandlers/ --pluginsdir=/usr/local/lib/hyphaplugins/

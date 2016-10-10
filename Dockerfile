@@ -31,6 +31,10 @@ RUN cd /hypha && git clone https://github.com/hyphaproject/hyphaplugins.git
 RUN cd /hypha/hyphaplugins && git submodule update --init --recursive && mkdir build && cd build \
 	&& cmake -DCMAKE_BUILD_TYPE=Release .. && make && make install && rm -rf /hypha/hyphaplugins
 
+RUN cd /hypha && git clone https://github.com/hyphaproject/hypharunner.git
+RUN cd /hypha/hypharunner && mkdir build && cd build \
+	&& cmake -DCMAKE_BUILD_TYPE=Release .. && make && make install && rm -rf /hypha/hypharunner
+
 RUN cd /tmp && git clone https://github.com/falsecam/confdesc.git
 RUN cd /tmp/confdesc && git submodule update --init --recursive && mkdir build && cd build \
 	&& cmake -DCMAKE_BUILD_TYPE=Release .. && make && make install && rm -rf /tmp/confdesc
@@ -39,6 +43,7 @@ RUN cd /hypha && git clone https://github.com/hyphaproject/hyphawebmanager.git
 RUN cd /hypha/hyphawebmanager && mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Release .. \
 	&& make && make install && rm -rf /hypha/hyphawebmanager
 
+RUN apt install -y espeak
 RUN ldconfig
 RUN mkdir -p /etc/hypha/
 ADD hypha.conf /etc/hypha/hypha.conf

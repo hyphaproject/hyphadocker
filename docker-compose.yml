@@ -17,12 +17,13 @@ services:
   build: .
   hostname: hypha
   restart: always
+  devices:
+   - "/dev/snd:/dev/snd"
   ports:
    - "8080:80"
+   - "47965:47965"
 
  hypha1:
   build: .
   hostname: hypha1
   restart: always
-  ports:
-   - "8081:80"
