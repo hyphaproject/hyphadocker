@@ -19,3 +19,10 @@ services:
   restart: always
   ports:
    - "8080:80"
+
+ hypha1:
+  build: .
+  hostname: hypha1
+  restart: always
+  ports:
+   - "8081:80"
